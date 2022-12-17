@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import sg.oracle.assessment.solution.model.Elements;
@@ -16,7 +17,7 @@ import sg.oracle.assessment.solution.model.Fibonacci;
 import sg.oracle.assessment.solution.service.FibonacciService;
 
 // Since we need to return Fibonacci sequence up to 100 elements, use BigInteger.
-@CrossOrigin(origins = "http://localhost:3000") // for ReactJS client to connect 
+
 @RestController
 public class FibonacciController {
 
@@ -25,18 +26,20 @@ public class FibonacciController {
 
     @GetMapping("/fibonacci")
     public ResponseEntity generateSequence(@RequestBody Elements elements) {
-        int elementsInt = elements.getElements();
-        BigInteger[] fibonacciSequence = fibonacciService.getFibonacciSequence(elementsInt);
-        BigInteger[] sortedSequence = fibonacciService.sortSequence(fibonacciSequence);
+    int elementsInt = elements.getElements();
+    BigInteger[] fibonacciSequence =
+    fibonacciService.getFibonacciSequence(elementsInt);
+    BigInteger[] sortedSequence =
+    fibonacciService.sortSequence(fibonacciSequence);
 
-        Fibonacci fibonacci = new Fibonacci(fibonacciSequence, sortedSequence);
+    Fibonacci fibonacci = new Fibonacci(fibonacciSequence, sortedSequence);
 
-        return ResponseEntity.status(HttpStatus.OK).body(fibonacci);
+    return ResponseEntity.status(HttpStatus.OK).body(fibonacci);
     }
 
     @GetMapping("/fibonacci/{elements}")
-    public ResponseEntity generateSequenceQueryParam(@PathVariable("elements") int elements) {
-        
+    public ResponseEntity generateSequencePathVar(@PathVariable("elements") int elements) {
+
         BigInteger[] fibonacciSequence = fibonacciService.getFibonacciSequence(elements);
         BigInteger[] sortedSequence = fibonacciService.sortSequence(fibonacciSequence);
 
