@@ -1,6 +1,6 @@
 ## SA55 Oracle Technical Assessment
 
-# Instructions on how to build and run the container
+### Instructions on how to build and run the container
 1. From terminal/cmd, cd into the project folder
 2. Enter docker build -t fibonacci . 
 3. Enter docker run -p 2000:80 fibonacci
